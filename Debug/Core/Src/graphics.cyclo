@@ -1,0 +1,7 @@
+../Core/Src/graphics.c:9:20:draw_pixel_buffer	1
+../Core/Src/graphics.c:16:6:draw_pixel	1
+../Core/Src/graphics.c:26:6:draw_rectangle	3
+../Core/Src/graphics.c:48:6:draw_line	9
+../Core/Src/graphics.c:89:6:draw_circle_outline	3
+../Core/Src/graphics.c:118:6:draw_custom_block	1
+../Core/Src/graphics.c:125:6:fillscreen	2

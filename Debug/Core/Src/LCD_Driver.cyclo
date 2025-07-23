@@ -1,0 +1,12 @@
+../Core/Src/LCD_Driver.c:15:6:HAL_SPI_TxCpltCallback	1
+../Core/Src/LCD_Driver.c:29:10:LCD_get_height	1
+../Core/Src/LCD_Driver.c:39:10:LCD_get_width	1
+../Core/Src/LCD_Driver.c:50:6:LCD_SPI_Init	1
+../Core/Src/LCD_Driver.c:66:6:LCD_Write_Command	2
+../Core/Src/LCD_Driver.c:83:6:LCD_Write_Data	2
+../Core/Src/LCD_Driver.c:100:6:LCD_write_pixel_data	2
+../Core/Src/LCD_Driver.c:117:6:LCD_Brightness	1
+../Core/Src/LCD_Driver.c:126:6:LCD_Hardware_Reset	1
+../Core/Src/LCD_Driver.c:147:6:LCD_rotation	7
+../Core/Src/LCD_Driver.c:181:6:LCD_Init	1
+../Core/Src/LCD_Driver.c:336:6:LCD_set_address_block	1
