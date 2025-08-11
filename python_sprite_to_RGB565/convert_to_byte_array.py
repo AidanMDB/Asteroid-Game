@@ -27,7 +27,7 @@ def create_16bit_array(filepath):
 
 
 def main():
-    create_16bit_array("number_9.bmp")
+    create_16bit_array("laser.bmp")
 
 
 

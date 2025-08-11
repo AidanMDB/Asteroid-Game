@@ -7,14 +7,28 @@ static uint16_t spaceship_curr_loc = SPACESHIP_START_X;
 static volatile uint16_t score = 0;
 static uint8_t* number[] = {number_0, number_1, number_2, number_3, number_4, number_5, number_6, number_7, number_8, number_9};
 //static uint16_t score = 0;
+static Laser lasers[MAX_NUM_LASERS];
 
+void draw_asteroid() {
+	draw_custom_block(100, 100, ASTEROID_SIZE, ASTEROID_SIZE, asteroid);
+}
+
+
+
+void init_laser() {
+	for (int i = 0; i < MAX_NUM_LASERS; i++) {
+		lasers[i].x = 0;
+		lasers[i].y = 0;
+	}
+}
 
 
 void game_init() {
 	fillscreen(BACKGROUND_COLOR);
 	draw_custom_block(SPACESHIP_START_X, SPACESHIP_ROW, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, spaceship_sprite);
 	update_score_board();
-
+	draw_asteroid();
+	init_laser();
 	//while(1) {
 
 	//}
@@ -28,6 +42,15 @@ void game_init() {
 
 
 void move(int8_t direction) {
+
+	// check its not going off the screen
+	if (direction > 0 && spaceship_curr_loc + direction + SPACESHIP_WIDTH >= LCD_get_width()) {
+		return;
+	}
+	if (direction < 0 && spaceship_curr_loc + direction < 0) {
+		return;
+	}
+
 	draw_custom_block(spaceship_curr_loc + direction, SPACESHIP_ROW, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, spaceship_sprite);
 
 	if (direction < 0) {
@@ -42,14 +65,33 @@ void move(int8_t direction) {
 
 
 
-void move_laser() {
 
+
+
+void move_laser() {
+	for (int i = 0; i < MAX_NUM_LASERS; i++) {
+		if (lasers[i].y != 0) {
+			if (lasers[i].y - 2 <= 0) {
+				lasers[i].y = 0;
+				continue;
+			}
+			lasers[i].y -= 2;
+			draw_custom_block(lasers[i].x, lasers[i].y, LASER_WIDTH, LASER_LENGTH, laser_sprite);
+			draw_rectangle(lasers[i].x, lasers[i].y + LASER_LENGTH + 2, LASER_WIDTH, 2, BACKGROUND_COLOR);
+		}
+	}
 }
 
 
 
 void shoot_laser() {
-	//draw_rectangle(space_curr_loc + (SPACESHIP_WIDTH / 2), );
+	for (int i = 0; i < MAX_NUM_LASERS; i++) {
+		if (lasers[i].y == 0) {
+			lasers[i].y = SPACESHIP_ROW - LASER_LENGTH;
+			lasers[i].x = spaceship_curr_loc + ((SPACESHIP_WIDTH - 1) / 2);
+			return;
+		}
+	}
 }
 
 

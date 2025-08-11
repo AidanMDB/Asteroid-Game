@@ -62,14 +62,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#define DEBOUNCE_DELAY 100
+#define DEBOUNCE_DELAY 50
 volatile uint8_t left_pressed = 0;
 volatile uint8_t right_pressed = 0;
 volatile uint8_t shoot_pressed = 0;
 volatile uint32_t last_right = 0;
 volatile uint32_t last_left = 0;
 volatile uint32_t last_shoot = 0;
-uint16_t movement_delay = 100;
+uint16_t movement_delay = 00;
 uint32_t last_move = 0;
 /* USER CODE END 0 */
 
@@ -123,27 +123,22 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+	//if (HAL_GPIO_ReadPin(SHOOT_PUSH_GPIO_Port, SHOOT_PUSH_Pin) == GPIO_PIN_RESET) {
+	//	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+	//	HAL_Delay(200);
+	//}
 	update_score_board();
 	increase_score();
-
+	move_laser();
 
 
 	if (left_pressed) {
-		uint32_t now = HAL_GetTick();
-		if (now - last_move >= movement_delay) {
-			move(-1);
-			last_move = now;
-		}
+		move(-2);
 	}
 
 
 	if (right_pressed) {
-		uint32_t now = HAL_GetTick();
-		if (now - last_move >= movement_delay) {
-			move(1);
-			last_move = now;
-		}
+		move(2);
 	}
 
 
@@ -207,12 +202,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 		// set flags then in the main loop call the move() function
 		case RIGHT_PUSH_Pin:
-			// toggle for visual debugging
-			HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 
 			// verify debounce then check if button was pushed or released
 			if (now - last_right >= DEBOUNCE_DELAY) {
+				// toggle for visual debugging
+				HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
 				last_right = now;
+
 				if (HAL_GPIO_ReadPin(RIGHT_PUSH_GPIO_Port, RIGHT_PUSH_Pin) == GPIO_PIN_SET) {
 					right_pressed = 1;
 				}
@@ -224,11 +220,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 			break;
 
 		case LEFT_PUSH_Pin:
-			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 
 
 			if (now - last_left >= DEBOUNCE_DELAY) {
+				HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
 				last_left = now;
+
 				if (HAL_GPIO_ReadPin(LEFT_PUSH_GPIO_Port, LEFT_PUSH_Pin) == GPIO_PIN_SET) {
 					left_pressed = 1;
 				}

@@ -8,3 +8,7 @@ Ended up turning using it to create a simple asteroid game where you get points 
 
 MCU - stm3232f091
 Display - 2.2" TFT SPI Display
+
+
+# Video of Current Progress
+https://youtube.com/shorts/L1mvZn3RK6E?feature=share 

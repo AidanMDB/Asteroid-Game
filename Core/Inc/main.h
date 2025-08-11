@@ -60,9 +60,6 @@ void Error_Handler(void);
 #define RIGHT_PUSH_Pin GPIO_PIN_13
 #define RIGHT_PUSH_GPIO_Port GPIOC
 #define RIGHT_PUSH_EXTI_IRQn EXTI4_15_IRQn
-#define SHOOT_PUSH_Pin GPIO_PIN_15
-#define SHOOT_PUSH_GPIO_Port GPIOC
-#define SHOOT_PUSH_EXTI_IRQn EXTI4_15_IRQn
 #define LEFT_PUSH_Pin GPIO_PIN_3
 #define LEFT_PUSH_GPIO_Port GPIOC
 #define LEFT_PUSH_EXTI_IRQn EXTI2_3_IRQn
@@ -70,6 +67,9 @@ void Error_Handler(void);
 #define LCD_DC_GPIO_Port GPIOA
 #define LCD_RST_Pin GPIO_PIN_1
 #define LCD_RST_GPIO_Port GPIOA
+#define SHOOT_PUSH_Pin GPIO_PIN_2
+#define SHOOT_PUSH_GPIO_Port GPIOB
+#define SHOOT_PUSH_EXTI_IRQn EXTI2_3_IRQn
 #define LCD_CS_Pin GPIO_PIN_12
 #define LCD_CS_GPIO_Port GPIOB
 #define LED_PWM_Pin GPIO_PIN_14
