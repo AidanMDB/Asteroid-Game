@@ -26,11 +26,10 @@ typedef struct _Laser{
 } Laser;
 
 
-
-typedef struct _star{
-
-} Star;
-
+typedef struct _Asteroid {
+	uint16_t x;
+	uint16_t y;
+} Asteroid;
 
 
 void game_init();

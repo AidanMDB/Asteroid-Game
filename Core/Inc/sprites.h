@@ -26,7 +26,7 @@ extern uint8_t number_9[];
 
 
 #define ASTEROID_SIZE 40
-extern uint8_t asteroid[];
+extern uint8_t asteroid_sprite[];
 
 #define LASER_LENGTH 15
 #define LASER_WIDTH 3

@@ -6,11 +6,24 @@
 static uint16_t spaceship_curr_loc = SPACESHIP_START_X;
 static volatile uint16_t score = 0;
 static uint8_t* number[] = {number_0, number_1, number_2, number_3, number_4, number_5, number_6, number_7, number_8, number_9};
-//static uint16_t score = 0;
 static Laser lasers[MAX_NUM_LASERS];
+static Asteroid asteroid = {0, 0};
+static uint32_t rng_state = 1;
+//static uint16_t score = 0;
 
-void draw_asteroid() {
-	draw_custom_block(100, 100, ASTEROID_SIZE, ASTEROID_SIZE, asteroid);
+
+void rng_LCG() {
+	rng_state = (rng_state * 1664525 + 1013904223) % 200;
+}
+
+
+
+
+void move_asteroid(uint8_t speed) {
+	rng_LCG();
+	asteroid.x = rng_state;
+	draw_custom_block(asteroid.x, asteroid.y, ASTEROID_SIZE, ASTEROID_SIZE, asteroid_sprite);
+	asteroid.y -= speed;
 }
 
 
@@ -27,7 +40,6 @@ void game_init() {
 	fillscreen(BACKGROUND_COLOR);
 	draw_custom_block(SPACESHIP_START_X, SPACESHIP_ROW, SPACESHIP_WIDTH, SPACESHIP_HEIGHT, spaceship_sprite);
 	update_score_board();
-	draw_asteroid();
 	init_laser();
 	//while(1) {
 
@@ -65,14 +77,12 @@ void move(int8_t direction) {
 
 
 
-
-
-
 void move_laser() {
 	for (int i = 0; i < MAX_NUM_LASERS; i++) {
 		if (lasers[i].y != 0) {
 			if (lasers[i].y - 2 <= 0) {
 				lasers[i].y = 0;
+				draw_rectangle(lasers[i].x, lasers[i].y, LASER_WIDTH, LASER_LENGTH, BACKGROUND_COLOR);
 				continue;
 			}
 			lasers[i].y -= 2;
